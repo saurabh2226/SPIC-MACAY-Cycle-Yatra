@@ -1,4 +1,68 @@
 /* Basic styles for the map */
+/* Logo styling */
+#logo-container {
+  position: fixed;
+  top: 5%; /* 50% minus half of the logo's height to center vertically */
+  left: 50%; /* 50% minus half of the logo's width to center horizontally */
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#spic-logo {
+  width: 25vw;  /* 20% of viewport width */
+  height: 20vh; /* 20% of viewport height */
+  opacity: 1.0; /* Slight transparency for better aesthetics */
+}
+@media (min-width: 1024px) {
+  #spic-logo {
+    width: 10vw;         /* Smaller logo for bigger screens */
+  }
+}
+
+/* Adjustments for tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #spic-logo {
+    width: 15vw;         /* Keep it slightly larger on tablets */
+  }
+}
+
+/* Adjustments for mobile phones */
+@media (max-width: 768px) {
+  #spic-logo {
+    width: 30vw;         /* Bigger logo for mobile for better visibility */
+  }
+}
+/* CSS to apply the fonts */
+body {
+  font-family: 'Merriweather', serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Tangerine', cursive;
+  font-size: 48px; /* Adjust as needed */
+}
+
+
+footer {
+  text-align: center;
+  font-family: 'Tangerine', cursive;
+  background-color: #5C4033;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 20;
+}
+
+
+
+body {
+  background-image: url('images/indian-pattern.jpg'); /* Add a suitable image */
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Merriweather', serif; /* Use a culturally relevant font */
+}
+
 html, body {
     height: 100%;
     margin: 0;
