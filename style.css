@@ -1,5 +1,97 @@
 /* Basic styles for the map */
 /* Logo styling */
+
+/* Smooth transition using ease */
+#loading-screen img {
+  animation: popThenShrink 1s ease forwards;
+}
+
+
+.hide-loading {
+  opacity: 0;
+}
+
+/* Add a fade-out after the pop-out animation finishes */
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+/* Styling for the reference popup */
+.reference-popup {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999;
+}
+
+.reference-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 12px; /* Smaller button text */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reference-content {
+  display: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100px;
+  border-radius: 5px;
+  font-size: 8px; /* Smaller popup text */
+}
+
+.reference-content h4 {
+  margin-top: 0;
+  font-size: 10px; /* Smaller header text */
+}
+
+.reference-popup ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.reference-popup ul li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+/* Color blocks for each phase */
+.color-block {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.orange {
+  background-color: #ff6600;
+}
+
+.green {
+  background-color: #00cc44;
+}
+
+.blue {
+  background-color: #0044cc;
+}
+
+
+#loading-screen img {
+  animation: popOut 1.5s ease-out forwards, fadeOut 1.5s 1.5s ease-out forwards;
+}
+
+
 #logo-container {
   position: fixed;
   top: 5%; /* 50% minus half of the logo's height to center vertically */
@@ -41,19 +133,6 @@ h1, h2, h3 {
   font-family: 'Tangerine', cursive;
   font-size: 48px; /* Adjust as needed */
 }
-
-
-footer {
-  text-align: center;
-  font-family: 'Tangerine', cursive;
-  background-color: #5C4033;
-  color: white;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 20;
-}
-
 
 
 body {

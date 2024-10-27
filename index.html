@@ -7,9 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <!-- Add this in the <head> section of your HTML -->
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&family=Tangerine:wght@700&display=swap" rel="stylesheet">
-<footer>
-  <p>"Society for Promotion of Indian Classical Music and Culture Amongst Youth" - SPIC MACAY</p>
-</footer>
+
   
   <!-- Leaflet.js and D3.js -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -21,11 +19,53 @@
 
 
 <body>
+  <body onload="showLogo()">
+    <!-- Loading Screen -->
+    <div id="loading-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: white; z-index: 9999; text-align: center; align-items: center; justify-content: center; display: flex;">
+        <img src="logo.png" alt="Logo" style="max-width: 200px;">
+    </div>
+
+    <!-- Main content of the page -->
+    <div id="main-content" style="display: none;">
+        <!-- Your existing page content goes here -->
+    </div>
+
+    <script>
+        function showLogo() {
+            var loadingScreen = document.getElementById('loading-screen');
+            var mainContent = document.getElementById('main-content');
+
+            // Show the loading screen
+            loadingScreen.style.display = 'flex';
+
+            // Hide it after 3 seconds
+            setTimeout(function() {
+                loadingScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+            }, 3000);
+        }
+    </script>
+</body>
+
   <div id="logo-container">
     <img src="https://spicmacay.org/themes/custom/spicmacay/logo.svg" alt="SPIC MACAY Logo" id="spic-logo">
   </div>
 
   <div id="map"></div>
+
+  <div id="reference-popup" class="reference-popup">
+    <button id="reference-btn" class="reference-btn">References</button>
+    <div id="reference-content" class="reference-content">
+      <h4>Line Information:</h4>
+      <ul>
+        <li><span class="color-block orange"></span> Phase 1: Delhi to Vadodara</li>
+        <li><span class="color-block green"></span> Phase 2: Kashmir to Kanyakumari</li>
+        <li><span class="color-block blue"></span> Phase 3: Kanyakumari to Guwahati</li>
+      </ul>
+    </div>
+  </div>
+  
+  
 
   <!-- Other content and scripts -->
 </body>

@@ -1,4 +1,3 @@
-// 
 
 // Initialize the map
 var map = L.map('map').setView([22.9734, 78.6569], 5); // Center on India
@@ -8,39 +7,143 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+// Simulating a loading screen delay
+setTimeout(function() {
+  loadingScreen.classList.add('hide-loading');
+  setTimeout(function() {
+      loadingScreen.style.display = 'none';
+      mainContent.style.display = 'block';
+  }, 1000); // Wait for the fade-out transition to complete
+}, 3000);
+
 // Visit data for cities with photos
 var visitData = {
-  "Varanasi": {
+  "Delhi": {
     "date": "2024-01-01",
-    "photo": "https://shorturl.at/cZp8S"
+    "photo": "whatsapp-image-2022-09-29-at-215905_1664469058.jpeg"
   },
-  "Agartala": {
+  "Vadodra": {
     "date": "2024-01-15",
-    "photo": "https://cdnbbsr.s3waas.gov.in/s3978d76676f5e7918f81d28e7d092ca0d/uploads/2022/09/2022092245-1024x560.jpg"
+    "photo": "OIP.jpg"
   },
+  "Kashmir": {
+    "date": "2024-03-18",
+    "photo": "P-6-2.jpg"
+  },
+  "Kanyakumari": {
+    "date": "2024-03-16",
+    "photo": "SPIC-MACAY-founder-reaches-Doon-on-cycle.jpg"
+  },
+  "Guwahati": {
+    "date": "2024-04-20",
+    "photo": "whatsapp-image-2022-09-29-at-215905_1664469058.jpeg"
+  }
 };
+
+// // JavaScript to toggle the reference popup
+// document.getElementById('reference-btn').addEventListener('click', function() {
+//   var content = document.getElementById('reference-content');
+//   if (content.style.display === "block") {
+//     content.style.display = "none";
+//   } else {
+//     content.style.display = "block";
+//   }
+// });
+
+// JavaScript to toggle the reference popup
+document.getElementById('reference-btn').addEventListener('click', function() {
+  var content = document.getElementById('reference-content');
+  content.style.display = (content.style.display === "block") ? "none" : "block";
+});
+
+// JavaScript to close the popup when clicking outside of it
+document.addEventListener('click', function(event) {
+  var popup = document.getElementById('reference-content');
+  var button = document.getElementById('reference-btn');
+  if (!popup.contains(event.target) && !button.contains(event.target)) {
+    popup.style.display = 'none';
+  }
+});
+
+// // JavaScript to toggle the reference popup with animation
+// document.getElementById('reference-btn').addEventListener('click', function() {
+//   var content = document.getElementById('reference-content');
+//   if (content.classList.contains('visible')) {
+//     content.classList.remove('visible');
+//   } else {
+//     content.classList.add('visible');
+//   }
+// });
+
+// // JavaScript to close the popup when clicking outside of it
+// document.addEventListener('click', function(event) {
+//   var popup = document.getElementById('reference-content');
+//   var button = document.getElementById('reference-btn');
+//   if (!popup.contains(event.target) && !button.contains(event.target)) {
+//     popup.classList.remove('visible');
+//   }
+// });
+
+
+
 
 // Cities coordinates
 var cities = [
-  { "name": "Varanasi", "lat": 25.3176, "lon": 82.9739 },
-  { "name": "Agartala", "lat": 23.8315, "lon": 91.2868 },
+  { "name": "Delhi", "lat": 28.6139, "lon": 77.2090 },             // Correct latitude and longitude for Delhi
+  { "name": "Vadodra", "lat": 22.3072, "lon": 73.1812 },           // Correct latitude and longitude for Vadodara
+  { "name": "Kashmir", "lat": 34.0837, "lon": 74.7973 },           // Correct latitude and longitude for Kashmir (Srinagar)
+  { "name": "Kanyakumari", "lat": 8.0883, "lon": 77.5385 },        // Correct latitude and longitude for Kanyakumari
+  { "name": "Guwahati", "lat": 26.1445, "lon": 91.7362 }           // Correct latitude and longitude for Guwahati
 ];
 
-// Add polyline connecting cities
-var polyline = L.polyline(cities.map(city => [city.lat, city.lon]), { 
-  color: '#ff6600',        // Beautiful vibrant color (orange)
+// Phase 1: Delhi to Vadodara
+var phase1Cities = [
+  { "name": "Delhi", "lat": 28.6139, "lon": 77.2090 },
+  { "name": "Vadodra", "lat": 22.3072, "lon": 73.1812 }
+];
+var polylinePhase1 = L.polyline(phase1Cities.map(city => [city.lat, city.lon]), { 
+  color: '#ff6600',        // Phase 1 color (orange)
   weight: 5,               // Line thickness
   opacity: 0.8,            // Line opacity
-  dashArray: '10, 10',     // Dashed line pattern
-  dashOffset: '0',         // Optional: can adjust the offset to create a shifting dash effect
+  dashArray: '10, 10',
+  dashOffset: '0',
   lineJoin: 'round'}).addTo(map);
+polylinePhase1.bindPopup("Phase 1: Delhi to Vadodara");
 
-// Zoom the map to fit the polyline
-map.fitBounds(polyline.getBounds());
+// Phase 2: Kashmir to Kanyakumari
+var phase2Cities = [
+  { "name": "Kashmir", "lat": 34.0837, "lon": 74.7973 },
+  { "name": "Kanyakumari", "lat": 8.0883, "lon": 77.5385 }
+];
+var polylinePhase2 = L.polyline(phase2Cities.map(city => [city.lat, city.lon]), { 
+  color: '#00cc44',        // Phase 2 color (green)
+  weight: 5,
+  opacity: 0.8,
+  dashArray: '10, 10',
+  dashOffset: '0',
+  lineJoin: 'round'}).addTo(map);
+polylinePhase2.bindPopup("Phase 2: Kashmir to Kanyakumari");
+
+// Phase 3: Kanyakumari to Guwahati
+var phase3Cities = [
+  { "name": "Kanyakumari", "lat": 8.0883, "lon": 77.5385 },
+  { "name": "Guwahati", "lat": 26.1445, "lon": 91.7362 }
+];
+var polylinePhase3 = L.polyline(phase3Cities.map(city => [city.lat, city.lon]), { 
+  color: '#0044cc',        // Phase 3 color (blue)
+  weight: 5,
+  opacity: 0.8,
+  dashArray: '10, 10',
+  dashOffset: '0',
+  lineJoin: 'round'}).addTo(map);
+polylinePhase3.bindPopup("Phase 3: Kanyakumari to Guwahati");
+
+// Zoom the map to fit all phases
+map.fitBounds(L.featureGroup([polylinePhase1, polylinePhase2, polylinePhase3]).getBounds());
 
 // Create a custom cyclist icon
 var cyclistIcon = L.icon({
-  iconUrl: 'https://akm-img-a-in.tosshub.com/lingo/itne/images/story/202403/65e8617e58117-inspiring-story-of-74-year-old-completes-a-solo-cycling-expedition-across-india-062845272-16x9.jpg', // Replace with your cyclist icon path
+  iconUrl: 'logo.png', // Replace with your cyclist icon path
   iconSize: [40, 40],                   // Adjust size as needed
   iconAnchor: [20, 20]
 });
@@ -90,8 +193,8 @@ function animateCyclist(coords, marker, durationPerSegment) {
   moveToNextSegment(); // Start animating the first segment
 }
 
-// Start the cyclist animation with a fast duration (e.g., 2000ms)
-animateCyclist(cities.map(city => [city.lat, city.lon]), cyclistMarker, 5000); // 2000ms per segment
+// Start the cyclist animation (e.g., 5000ms per segment)
+animateCyclist(cities.map(city => [city.lat, city.lon]), cyclistMarker, 5000);
 
 // Add markers and popups for each city
 cities.forEach(function(city) {
@@ -118,3 +221,4 @@ cities.forEach(function(city) {
     marker.closePopup();
   });
 });
+
